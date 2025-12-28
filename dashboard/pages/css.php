@@ -19,6 +19,22 @@
 <!-- Datetime Picker -->
 <link rel="stylesheet" href="assets/extensions/flatpickr/flatpickr.min.css">
 <style>
+    :root {
+        --primary: #0b5ed7;
+        /* biru laut elegan */
+        --secondary: #2ec4b6;
+        /* toska natural */
+        --accent: #f4a261;
+        /* aksen hangat */
+        --dark: #0f172a;
+        /* teks utama */
+        --muted: #6b7280;
+        /* teks sekunder */
+        --bg-soft: #f8fafc;
+        /* background lembut */
+        --border-soft: #e5e7eb;
+    }
+
     @media (max-width: 768px) {
         .pukul {
             display: none;

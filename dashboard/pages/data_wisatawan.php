@@ -9,7 +9,7 @@ if (!isset($_SESSION['sesi_role']) || $_SESSION['sesi_role'] !== 'admin') {
     <div class="card">
         <div class="card-header">
             <h5 class="card-title">
-                Data Admin
+                Data Wisatawan
             </h5>
         </div>
 
@@ -34,14 +34,14 @@ if (!isset($_SESSION['sesi_role']) || $_SESSION['sesi_role'] !== 'admin') {
 
                         $query  = "SELECT id_user, nama_lengkap, no_hp, jenis_kelamin, role, dibuat_pada
                                    FROM users
-                                   WHERE role = 'admin'
+                                   WHERE role = 'wisatawan'
                                    ORDER BY dibuat_pada DESC";
                         $result = mysqli_query($koneksi, $query);
 
                         if (!$result) {
                             echo '<tr><td colspan="7" class="text-center text-danger">Query gagal: ' . htmlspecialchars(mysqli_error($koneksi)) . '</td></tr>';
                         } else if (mysqli_num_rows($result) === 0) {
-                            echo '<tr><td colspan="7" class="text-center text-muted">Belum ada data admin.</td></tr>';
+                            echo '<tr><td colspan="7" class="text-center text-muted">Belum ada data wisatawan.</td></tr>';
                         } else {
                             while ($users = mysqli_fetch_assoc($result)) :
                         ?>
@@ -52,7 +52,7 @@ if (!isset($_SESSION['sesi_role']) || $_SESSION['sesi_role'] !== 'admin') {
                                     <td><?= htmlspecialchars($users['no_hp']); ?></td>
                                     <td><?= htmlspecialchars($users['jenis_kelamin']); ?></td>
                                     <td>
-                                        <span class="badge bg-danger">
+                                        <span class="badge bg-primary">
                                             <?= ucfirst(htmlspecialchars($users['role'])); ?>
                                         </span>
                                     </td>

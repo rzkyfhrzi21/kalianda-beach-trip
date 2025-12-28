@@ -1,12 +1,14 @@
 <?php
+require_once '../functions/config.php';
+
 session_start();
 if (@$_SESSION['sesi_role']) {
     switch ($_SESSION['sesi_role']) {
         case 'admin':
             header('Location: ../dashboard/admin');
             break;
-        case 'pendonor':
-            header(header: 'Location: ../dashboard/pendonor');
+        case 'wisatawan':
+            header(header: 'Location: ../dashboard/wisatawan');
             break;
         default:
             header(header: 'Location: ../logout.php');
@@ -28,7 +30,7 @@ $usernameLogin = isset($_GET['username']) ? $_GET['username'] : '';
     <meta name="robots" content="noindex, nofollow">
     <link rel="shortcut icon" href="../assets/pmi-bg.jpg" type="image/x-icon">
 
-    <title>Login - Donorku</title>
+    <title>Login - <?php echo NAMA_WEB ?></title>
 
     <link rel="shortcut icon" href="../dashboard/assets/pmi.png" type="image/x-icon">
     <link rel="stylesheet" href="../dashboard/assets/compiled/css/app.css">
@@ -82,7 +84,7 @@ $usernameLogin = isset($_GET['username']) ? $_GET['username'] : '';
                         <p class="auth-subtitle mb-2">Hi, Selamat datang #PahlawanDarah</p>
                     </div>
                     <div class="card-body">
-                        <form class="form" data-parsley-validate action="../functions/cek_login.php" method="post" autocomplete="off">
+                        <form class="form" data-parsley-validate action="../functions/function_auth.php" method="post" autocomplete="off">
                             <div class="form-group position-relative has-icon-left mb-3 has-icon-left">
                                 <label for="username" class="form-label">Username</label>
                                 <div class="position-relative">
@@ -102,7 +104,7 @@ $usernameLogin = isset($_GET['username']) ? $_GET['username'] : '';
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" name="role" value="pendonor">
+                            <input type="hidden" name="role" value="wisatawan">
 
                             <button name="btn_login" type="submit" class="btn btn-danger btn-block btn-lg shadow-lg mt-2">Log In</button>
                         </form>

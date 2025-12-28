@@ -1,6 +1,6 @@
 <?php
 
-include 'koneksi.php';
+include 'config.php';
 
 if (isset($_POST['kirim_pertanyaan'])) {
 	// Mengambil data dari form

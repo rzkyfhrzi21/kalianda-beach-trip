@@ -32,8 +32,8 @@
                                     </div>
                                 </div>
                                 <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                    <h6 class="text-muted font-semibold">Total Pendonor</h6>
-                                    <h6 class="font-extrabold mb-0"><?= $totalPendonor; ?></h6>
+                                    <h6 class="text-muted font-semibold">Total wisatawan</h6>
+                                    <h6 class="font-extrabold mb-0"><?= $totalwisatawan; ?></h6>
                                 </div>
                             </div>
                         </div>
@@ -114,10 +114,10 @@
                 <div class="col-12 col-xl-4">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Jenis Pendonor</h4>
+                            <h4>Jenis wisatawan</h4>
                         </div>
                         <div class="card-body">
-                            <div id="chart-pendonor-jk"></div>
+                            <div id="chart-wisatawan-jk"></div>
                         </div>
                     </div>
                 </div>
@@ -158,7 +158,7 @@
                                     </thead>
                                     <tbody>
                                         <?php
-                                        include '../functions/koneksi.php';
+                                        // include '../functions/config.php';
                                         $no = 1;
 
                                         // Query dengan users
@@ -210,7 +210,7 @@
                 </div>
                 <div class="card-content pb-4">
                     <?php
-                    include '../functions/koneksi.php';
+                    // include '../functions/config.php';
                     $no = 1;
 
                     // Query dengan users
@@ -232,7 +232,7 @@
                         </div>
                     <?php endwhile ?>
                     <div class="px-4">
-                        <a href="?page=data pendonor" class='btn btn-block btn-xl btn-outline-primary font-bold mt-3'>Selengkapnya</a>
+                        <a href="?page=data wisatawan" class='btn btn-block btn-xl btn-outline-primary font-bold mt-3'>Selengkapnya</a>
                     </div>
                 </div>
             </div>

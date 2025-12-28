@@ -1,6 +1,6 @@
 <?php
 
-include 'koneksi.php';
+include 'config.php';
 $tanggal_sekarang   = date('Y-m-d');
 $waktu_sekarang     = date('H:i');
 $bulan_sekarang     = date('m');
@@ -30,28 +30,28 @@ if ($row) {
 
 
 // Menghitung total pengguna
-$sql_totalPendonor = mysqli_query($koneksi, "SELECT COUNT(*) AS total_pendonor FROM users");
-$totalPendonor = mysqli_fetch_assoc($sql_totalPendonor)['total_pendonor'];
+$sql_totalwisatawan = mysqli_query($koneksi, "SELECT COUNT(*) AS total_wisatawan FROM users");
+$totalwisatawan = mysqli_fetch_assoc($sql_totalwisatawan)['total_wisatawan'];
 
 // Menghitung total kegiatan donor
 $sql_kegiatanDonor = mysqli_query($koneksi, "SELECT COUNT(*) AS kegiatan_donor FROM kegiatan_donor");
 $kegiatanDonor = mysqli_fetch_assoc($sql_kegiatanDonor)['kegiatan_donor'];
 
-// Menghitung pendonor berhasil
-$sql_pendonorBerhasil = mysqli_query($koneksi, "SELECT COUNT(*) AS pendonor_berhasil FROM riwayat_donor");
-$pendonorBerhasil = mysqli_fetch_assoc($sql_pendonorBerhasil)['pendonor_berhasil'];
+// Menghitung wisatawan berhasil
+$sql_wisatawanBerhasil = mysqli_query($koneksi, "SELECT COUNT(*) AS wisatawan_berhasil FROM riwayat_donor");
+$wisatawanBerhasil = mysqli_fetch_assoc($sql_wisatawanBerhasil)['wisatawan_berhasil'];
 
-// Menghitung total pendonor berhasil
-$sql_totalPendonorBerhasil = mysqli_query($koneksi, "SELECT COUNT(*) AS totalPendonorBerhasil FROM riwayat_donor WHERE status = 'berhasil'");
-$totalPendonorBerhasil = mysqli_fetch_assoc($sql_totalPendonorBerhasil)['totalPendonorBerhasil'];
+// Menghitung total wisatawan berhasil
+$sql_totalwisatawanBerhasil = mysqli_query($koneksi, "SELECT COUNT(*) AS totalwisatawanBerhasil FROM riwayat_donor WHERE status = 'berhasil'");
+$totalwisatawanBerhasil = mysqli_fetch_assoc($sql_totalwisatawanBerhasil)['totalwisatawanBerhasil'];
 
-// Menghitung total pendonor layak
-$sql_totalPendonorLayak = mysqli_query($koneksi, "SELECT COUNT(*) AS totalPendonorLayak FROM riwayat_donor WHERE status = 'layak'");
-$totalPendonorLayak = mysqli_fetch_assoc($sql_totalPendonorLayak)['totalPendonorLayak'];
+// Menghitung total wisatawan layak
+$sql_totalwisatawanLayak = mysqli_query($koneksi, "SELECT COUNT(*) AS totalwisatawanLayak FROM riwayat_donor WHERE status = 'layak'");
+$totalwisatawanLayak = mysqli_fetch_assoc($sql_totalwisatawanLayak)['totalwisatawanLayak'];
 
-// Menghitung total pendonor gagal
-$sql_totalPendonorGagal = mysqli_query($koneksi, "SELECT COUNT(*) AS totalPendonorGagal FROM riwayat_donor WHERE status = 'gagal'");
-$totalPendonorGagal = mysqli_fetch_assoc($sql_totalPendonorGagal)['totalPendonorGagal'];
+// Menghitung total wisatawan gagal
+$sql_totalwisatawanGagal = mysqli_query($koneksi, "SELECT COUNT(*) AS totalwisatawanGagal FROM riwayat_donor WHERE status = 'gagal'");
+$totalwisatawanGagal = mysqli_fetch_assoc($sql_totalwisatawanGagal)['totalwisatawanGagal'];
 
 // Menghitung jumlah pengunjung hari ini
 $sql_PengunjungHariIni = mysqli_query($koneksi, "SELECT COUNT(*) AS pengunjung_hariIni FROM web_view WHERE tgl = '$tanggal_sekarang'");
@@ -70,12 +70,12 @@ $sql_TotalKegiatan = mysqli_query($koneksi, "SELECT COUNT(*) AS total_kegiatan F
 $totalKegiatan = mysqli_fetch_assoc($sql_TotalKegiatan)['total_kegiatan'];
 
 // Query untuk menghitung jumlah pengguna perempuan
-$sql_totalPendonorLakiLaki = mysqli_query($koneksi, "SELECT COUNT(*) AS totalPendonorLakiLaki FROM users WHERE jenis_kelamin = 'Laki-laki' AND role = 'pendonor'");
-$totalPendonorLakiLaki = mysqli_fetch_assoc($sql_totalPendonorLakiLaki)['totalPendonorLakiLaki'];
+$sql_totalwisatawanLakiLaki = mysqli_query($koneksi, "SELECT COUNT(*) AS totalwisatawanLakiLaki FROM users WHERE jenis_kelamin = 'Laki-laki' AND role = 'wisatawan'");
+$totalwisatawanLakiLaki = mysqli_fetch_assoc($sql_totalwisatawanLakiLaki)['totalwisatawanLakiLaki'];
 
 // Query untuk menghitung jumlah pengguna perempuan
-$sql_totalPendonorPerempuan = mysqli_query($koneksi, "SELECT COUNT(*) AS totalPendonorPerempuan FROM users WHERE jenis_kelamin = 'Perempuan' AND role = 'pendonor'");
-$totalPendonorPerempuan = mysqli_fetch_assoc($sql_totalPendonorPerempuan)['totalPendonorPerempuan'];
+$sql_totalwisatawanPerempuan = mysqli_query($koneksi, "SELECT COUNT(*) AS totalwisatawanPerempuan FROM users WHERE jenis_kelamin = 'Perempuan' AND role = 'wisatawan'");
+$totalwisatawanPerempuan = mysqli_fetch_assoc($sql_totalwisatawanPerempuan)['totalwisatawanPerempuan'];
 
 // Query untuk menghitung jumlah kegiatan yang akan datang (segera)
 $sql_totalKegiatanSegera = mysqli_query($koneksi, "SELECT COUNT(*) AS totalKegiatanSegera FROM kegiatan_donor WHERE tanggal_kegiatan > '$tanggal_sekarang'");

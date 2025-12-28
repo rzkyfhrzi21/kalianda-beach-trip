@@ -1,6 +1,6 @@
 <?php
 
-include '../functions/koneksi.php';
+include '../functions/config.php';
 
 $id_user = htmlspecialchars(trim($sesi_id));
 
@@ -12,10 +12,10 @@ if ($sql = mysqli_query($koneksi, $query)) {
     $users = mysqli_fetch_array($sql);
 
     // Ambil data pengguna
-    $nama_user      = isset($users['nama_user']) ? $users['nama_user'] : '';
+    $nama_lengkap      = isset($users['nama_lengkap']) ? $users['nama_lengkap'] : '';
     $id_user        = isset($users['id_user']) ? $users['id_user'] : '';
-    $img_user       = isset($users['img_user']) ? $users['img_user'] : '';
-    $no_telp        = isset($users['no_telp']) ? $users['no_telp'] : '';
+    $foto_profil       = isset($users['foto_profil']) ? $users['foto_profil'] : '';
+    $no_hp        = isset($users['no_hp']) ? $users['no_hp'] : '';
     $gol_darah      = isset($users['gol_darah']) ? $users['gol_darah'] : '';
     $jenis_kelamin  = isset($users['jenis_kelamin']) ? $users['jenis_kelamin'] : '';
     $tempat_lahir   = isset($users['tempat_lahir']) ? $users['tempat_lahir'] : '';
@@ -61,11 +61,11 @@ if ($sql = mysqli_query($koneksi, $query)) {
                 <div class="card-body">
                     <div class="d-flex justify-content-center align-items-center flex-column">
                         <div class="avatar avatar-xl">
-                            <img src="assets/<?= empty($img_user) ? 'static/images/faces/1.jpg' : 'profile/' . htmlspecialchars($img_user) ?>"
+                            <img src="assets/<?= empty($foto_profil) ? 'static/images/faces/1.jpg' : 'profil/' . htmlspecialchars($foto_profil) ?>"
                                 alt="Foto Profil"
                                 onerror="this.src='assets/static/images/faces/1.jpg'">
                         </div>
-                        <h3 class="mt-3"><?= htmlspecialchars($nama_user); ?></h3>
+                        <h3 class="mt-3"><?= htmlspecialchars($nama_lengkap); ?></h3>
                         <p class="text-small text-capitalize text-bold"><?= htmlspecialchars($role); ?></p>
                     </div>
                 </div>
@@ -77,11 +77,11 @@ if ($sql = mysqli_query($koneksi, $query)) {
                         <div class="form-group">
                             <label for="formFileFoto" class="form-label">Foto Profil</label>
                             <p><small class="text-bold"><code>*Abaikan jika tidak ingin mengganti foto profil</code></small></p>
-                            <input type="file" name="img_user" class="image-crop-filepond"
+                            <input type="file" name="foto_profil" class="image-crop-filepond"
                                 image-crop-aspect-ratio="1:1" id="formFileFoto" data-max-file-size="1MB" data-max-files="1">
                         </div>
                         <input type="hidden" name="id_user" value="<?= htmlspecialchars($id_user); ?>">
-                        <input type="hidden" name="img_lama" value="<?= htmlspecialchars($img_user); ?>">
+                        <input type="hidden" name="img_lama" value="<?= htmlspecialchars($foto_profil); ?>">
                         <div class="form-group">
                             <button type="submit" id="btn-update-foto" name="btn_editfotoakun" class="btn btn-primary">Update Foto</button>
                         </div>
@@ -104,7 +104,7 @@ if ($sql = mysqli_query($koneksi, $query)) {
                             </div>
                         </div>
                         <input type="hidden" name="id_user" value="<?= htmlspecialchars($id_user); ?>">
-                        <input type="hidden" name="img_user" value="<?= htmlspecialchars($img_user); ?>">
+                        <input type="hidden" name="foto_profil" value="<?= htmlspecialchars($foto_profil); ?>">
                         <input type="hidden" name="identitas_lama" value="<?= htmlspecialchars($foto_identitas); ?>">
                         <div class="form-group my-2 d-flex justify-content-end">
                             <button type="submit" name="btn_deleteakun" class="btn btn-danger" id="btn-delete-account" disabled>Hapus Akun</button>
@@ -129,10 +129,10 @@ if ($sql = mysqli_query($koneksi, $query)) {
                                         type="text"
                                         id="nama_lengkap"
                                         class="form-control"
-                                        name="nama_user"
+                                        name="nama_lengkap"
                                         placeholder="Nama Lengkap"
                                         minlength="3"
-                                        value="<?= htmlspecialchars($nama_user); ?>"
+                                        value="<?= htmlspecialchars($nama_lengkap); ?>"
                                         data-parsley-required="true" />
                                     <div class="form-control-icon">
                                         <i class="bi bi-person"></i>
@@ -160,18 +160,18 @@ if ($sql = mysqli_query($koneksi, $query)) {
                         </div>
                         <div class="row form-group mandatory has-icon-left">
                             <div class="col-md-6 col-12">
-                                <label for="no_telp" class="form-label">No Telepon</label>
+                                <label for="no_hp" class="form-label">No Telepon</label>
                                 <div class="position-relative">
                                     <input
                                         type="tel"
-                                        id="no_telp"
+                                        id="no_hp"
                                         class="form-control"
-                                        name="no_telp"
+                                        name="no_hp"
                                         placeholder="08***"
                                         pattern="^\d{10,15}$"
                                         data-parsley-required="true"
                                         data-parsley-pattern="^\d{10,15}$"
-                                        value="<?= htmlspecialchars($no_telp); ?>" />
+                                        value="<?= htmlspecialchars($no_hp); ?>" />
                                     <div class="form-control-icon">
                                         <i class="bi bi-phone"></i>
                                     </div>

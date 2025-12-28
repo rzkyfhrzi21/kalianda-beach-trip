@@ -82,7 +82,7 @@
       Swal.fire({
         icon: "success",
         title: "Berhasil!",
-        text: "Pendonor lulus semua cek kesehatan. Silakan ke ruangan donor darah 😁",
+        text: "wisatawan lulus semua cek kesehatan. Silakan ke ruangan donor darah 😁",
         footer: "@ Donorku",
         timer: 3000,
         showConfirmButton: false,
@@ -275,7 +275,7 @@
       Swal.fire({
         icon: "warning",
         title: "Peringatan!",
-        text: "Terima kasih sudah mendaftar. Tapi maaf, data pendonor tidak sesuai dengan foto identitas 🤗",
+        text: "Terima kasih sudah mendaftar. Tapi maaf, data wisatawan tidak sesuai dengan foto identitas 🤗",
         footer: "@ Donorku",
         timer: 3000,
         showConfirmButton: false,

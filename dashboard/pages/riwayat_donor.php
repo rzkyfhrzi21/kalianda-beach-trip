@@ -21,7 +21,7 @@
                         <thead>
                             <tr>
                                 <th>NO</th>
-                                <th>Pendonor</th>
+                                <th>wisatawan</th>
                                 <th width="100px">Kegiatan</th>
                                 <th>Tgl Donor</th>
                                 <th>Gol Darah</th>
@@ -37,7 +37,7 @@
                         </thead>
                         <tbody>
                             <?php
-                            include '../functions/koneksi.php';
+                            include '../functions/config.php';
                             $no     = 1;
                             $id     = htmlspecialchars(trim(@$_GET['id']));
 

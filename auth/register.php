@@ -1,4 +1,6 @@
 <?php
+require_once '../functions/config.php';
+
 session_start();
 
 $usernameLogin  =  isset($_GET['username']) ? $_GET['username'] : '';
@@ -15,7 +17,7 @@ $nama_userLogin =  isset($_GET['nama_user']) ? $_GET['nama_user'] : '';
 
     <meta name="robots" content="noindex, nofollow">
 
-    <title>Registrasi - Donorku</title>
+    <title>Registrasi - <?php echo NAMA_WEB ?></title>
     <link rel="shortcut icon" href="../assets/pmi-bg.jpg" type="image/x-icon">
 
 
@@ -71,7 +73,7 @@ $nama_userLogin =  isset($_GET['nama_user']) ? $_GET['nama_user'] : '';
                         <p class="auth-subtitle mb-2">Hi, Ayo bergabung menjadi #PahlawanDarah</p>
                     </div>
                     <div class="card-body">
-                        <form class="form" data-parsley-validate action="../functions/cek_login.php" method="post" autocomplete="off">
+                        <form class="form" data-parsley-validate action="../functions/function_auth.php" method="post" autocomplete="off">
                             <div class="form-group position-relative has-icon-left mb-3 has-icon-left">
                                 <label for="Nama Lengkap" class="form-label">Nama Lengkap</label>
                                 <div class="position-relative">
@@ -111,7 +113,7 @@ $nama_userLogin =  isset($_GET['nama_user']) ? $_GET['nama_user'] : '';
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" name="role" value="pendonor">
+                            <input type="hidden" name="role" value="wisatawan">
                             <button type="submit" name="btn_register" class="btn btn-danger btn-block btn-lg shadow-lg mt-2">Registrasi</button>
                         </form>
                         <div class="text-center mt-3 text-lg fs-4">

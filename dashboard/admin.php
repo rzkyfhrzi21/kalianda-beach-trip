@@ -1,27 +1,23 @@
 <?php
 session_start();
 
-include '../functions/koneksi.php';
-include '../functions/data.php';
-// include '../functions/data_notif.php';
-include '../functions/insight.php';
+require_once '../functions/config.php';
 
 // Ambil data sesi
 $sesi_id = $_SESSION['sesi_id'];
-
 $query = "SELECT * FROM users WHERE id_user = '$sesi_id'";
 
 if ($sql = mysqli_query($koneksi, $query)) {
-    $users = mysqli_fetch_array($sql);
     // Ambil data pengguna
-    $sesi_nama      = isset($users['nama_user']) ? $users['nama_user'] : '';
+    $users = mysqli_fetch_array($sql);
+    $sesi_nama      = isset($users['nama_lengkap']) ? $users['nama_lengkap'] : '';
     $sesi_username  = isset($users['username']) ? $users['username'] : '';
     $sesi_role      = isset($users['role']) ? $users['role'] : '';
-    $sesi_img       = isset($users['img_user']) ? $users['img_user'] : '';
+    $sesi_img       = isset($users['foto_profil']) ? $users['foto_profil'] : '';
 }
 
 // Pastikan pengguna sudah login dan memiliki role admin
-if (!isset($sesi_role) || $sesi_role !== 'admin') {
+if (!isset($_SESSION) || $sesi_role !== 'admin') {
     header('Location: ../auth/login');
     exit();
 }
@@ -38,9 +34,9 @@ $page = $_GET['page'] ?? 'dashboard'; // Default ke 'dashboard' jika tidak ada p
 
     <meta name="robots content=" noindex, nofollow">
 
-    <title><?= ucfirst($page); ?> - Panel Admin Donorku</title>
+    <title><?= ucfirst($page); ?> - Panel Admin <?php echo NAMA_WEB ?></title>
 
-    <link rel="shortcut icon" href="../assets/pmi-bg.jpg" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/logo.png" type="image/x-icon">
 
     <?php include 'pages/css.php'; ?>
 </head>
@@ -53,7 +49,7 @@ $page = $_GET['page'] ?? 'dashboard'; // Default ke 'dashboard' jika tidak ada p
                 <div class="header-top">
                     <div class="container">
                         <div class="logo">
-                            <a href="index"><img src="../assets/logopmi.png" width="100" alt="Logo"></a>
+                            <a href="index"><img src="../assets/logo.png" width="100" alt="Logo"></a>
                         </div>
                         <div class="logo pukul">
                             <div class="sidebar-hide align-items-left">
@@ -95,9 +91,9 @@ $page = $_GET['page'] ?? 'dashboard'; // Default ke 'dashboard' jika tidak ada p
                             <div class="dropdown">
                                 <a href="#" id="topbarUser Dropdown" class="user-dropdown d-flex align-items-center dropend dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                     <div class="avatar avatar-md2">
-                                        <img src="assets/<?= empty($sesi_img) ? 'static/images/faces/1.jpg' : 'profile/' . htmlspecialchars($sesi_img) ?>"
+                                        <img src="assets/<?= empty($sesi_img) ? 'static/images/faces/1.jpg' : 'img/foto_profil/' . htmlspecialchars($sesi_img) ?>"
                                             alt="Foto Profil"
-                                            onerror="this.src='assets/static/images/faces/2.jpg'">
+                                            onerror="this.src='assets/static/images/faces/1.jpg'">
 
                                     </div>
                                     <div class="text">
@@ -106,7 +102,7 @@ $page = $_GET['page'] ?? 'dashboard'; // Default ke 'dashboard' jika tidak ada p
                                     </div>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end shadow-lg" aria-labelledby="topbarUser Dropdown">
-                                    <li><a class="dropdown-item" href="?page=profile">Profile</a></li>
+                                    <li><a class="dropdown-item" href="?page=profil">Profil</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
@@ -155,7 +151,7 @@ $page = $_GET['page'] ?? 'dashboard'; // Default ke 'dashboard' jika tidak ada p
                                                 <a href="?page=data admin" class='submenu-link'>Data Admin</a>
                                             </li>
                                             <li class="submenu-item">
-                                                <a href="?page=data pendonor" class='submenu-link'>Data Pendonor</a>
+                                                <a href="?page=data wisatawan" class='submenu-link'>Data Wisatawan</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -163,44 +159,24 @@ $page = $_GET['page'] ?? 'dashboard'; // Default ke 'dashboard' jika tidak ada p
                             </li>
                             <li class="menu-item has-sub">
                                 <a href="#" class='menu-link'>
-                                    <span><i class="bi bi-map-fill"></i> Kegiatan</span>
+                                    <span><i class="bi bi-map-fill"></i> Destinasi Wisata</span>
                                 </a>
                                 <div class="submenu">
                                     <div class="submenu-group-wrapper">
                                         <ul class="submenu-group">
                                             <li class="submenu-item">
-                                                <a href="?page=tambah kegiatan" class='submenu-link'>Tambah Kegiatan</a>
+                                                <a href="?page=tambah destinasi" class='submenu-link'>Tambah Destinasi</a>
                                             </li>
                                             <li class="submenu-item">
-                                                <a href="?page=data kegiatan" class='submenu-link'>Data Kegiatan</a>
+                                                <a href="?page=data destinasi" class='submenu-link'>List Destinasi</a>
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
                             </li>
-                            <li class="menu-item has-sub">
-                                <a href="#" class='menu-link'>
-                                    <span class="fa-fw select-all fas"></span> Donor Darah
-                                </a>
-                                <div class="submenu">
-                                    <div class="submenu-group-wrapper">
-                                        <ul class="submenu-group">
-                                            <li class="submenu-item">
-                                                <a href="?page=mulai donor" class='submenu-link'>Mulai Donor</a>
-                                            </li>
-                                            <li class="submenu-item">
-                                                <a href="?page=riwayat donor" class='submenu-link'>Riwayat Donor</a>
-                                            </li>
-                                            <li class="submenu-item">
-                                                <a href="?page=kriteria donor" class='submenu-link'>Kriteria Donor</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="menu-item  ">
-                                <a href="?page=galeri kegiatan" class='menu-link'>
-                                    <span><i class="bi bi-image-fill"></i> Galeri Donor</span>
+                            <li class="menu-item">
+                                <a href="?page=profil" class='menu-link'>
+                                    <span><i class="select-all fas"></i> Profil</span>
                                 </a>
                             </li>
                         </ul>
@@ -246,41 +222,23 @@ $page = $_GET['page'] ?? 'dashboard'; // Default ke 'dashboard' jika tidak ada p
                     case 'data admin':
                         include 'pages/data_admin.php';
                         break;
-                    case 'data pendonor':
-                        include 'pages/data_pendonor.php';
+                    case 'data wisatawan':
+                        include 'pages/data_wisatawan.php';
                         break;
                     case 'registrasi':
                         include 'pages/registrasi_user.php';
                         break;
-                    case 'riwayat donor':
-                        include 'pages/riwayat_donor.php';
+                    case 'profil':
+                        include 'pages/profil.php';
                         break;
-                    case 'mulai donor':
-                        include 'pages/mulai_donor.php';
+                    case 'data destinasi':
+                        include 'pages/data_destinasi.php';
                         break;
-                    case 'profile':
-                        include 'pages/profile.php';
+                    case 'tambah destinasi':
+                        include 'pages/tambah_destinasi.php';
                         break;
-                    case 'data kegiatan':
-                        include 'pages/data_kegiatan.php';
-                        break;
-                    case 'tambah kegiatan':
-                        include 'pages/tambah_kegiatan.php';
-                        break;
-                    case 'detail kegiatan':
-                        include 'pages/detail_kegiatan.php';
-                        break;
-                    case 'cek kesehatan':
-                        include 'pages/cek_kesehatan.php';
-                        break;
-                    case 'kriteria donor':
-                        include 'pages/kriteria_donor.php';
-                        break;
-                    case 'galeri kegiatan':
-                        include 'pages/galeri_kegiatan.php';
-                        break;
-                    case 'tes':
-                        include 'pages/tes.php';
+                    case 'detail destinasi':
+                        include 'pages/detail_destinasi.php';
                         break;
                     default:
                         include 'pages/dashboard.php';
@@ -289,23 +247,68 @@ $page = $_GET['page'] ?? 'dashboard'; // Default ke 'dashboard' jika tidak ada p
                 ?>
             </div>
 
-            <footer>
+            <footer class="mt-5">
                 <div class="container">
-                    <div class="footer clearfix mb-0 text-muted">
-                        <div class="float-start">
-                            <p>
-                                <script>
-                                    document.write(new Date().getFullYear())
-                                </script> &copy; Donorku
+                    <div class="row py-4 border-top">
+
+                        <!-- Brand -->
+                        <div class="col-12 col-md-5 mb-3">
+                            <h5 class="mb-2"><?= NAMA_WEB; ?></h5>
+                            <p class="mb-2 small text-muted">
+                                Platform pemesanan wisata yang membantu kamu memilih destinasi, menentukan jadwal kunjungan,
+                                dan melakukan konfirmasi pembayaran secara mudah.
+                            </p>
+                            <p class="mb-0 small text-muted">
+                                <span class="fw-bold">Kontak cepat:</span>
+                                <a href="<?= URL_WA; ?>" target="_blank" class="text-decoration-none"><?= NO_WA; ?></a>
+                                <span class="mx-2">•</span>
+                                <a href="mailto:<?= EMAIL; ?>" class="text-decoration-none"><?= EMAIL; ?></a>
                             </p>
                         </div>
-                        <div class="float-end">
-                            <p>Dibuat dengan <span class="text-danger"><i class="bi bi-heart"></i></span>
-                                oleh <a href="https://www.instagram.com/fauziahzhraaa__/" target="_blank">Fauziah Zahra</a></p>
+
+                        <!-- Quick links -->
+                        <div class="col-6 col-md-3 mb-3">
+                            <h6 class="mb-2">Menu</h6>
+                            <ul class="list-unstyled small mb-0">
+                                <li class="mb-1"><a href="../index" class="text-decoration-none text-muted">Beranda</a></li>
+                                <li class="mb-1"><a href="../destination" class="text-decoration-none text-muted">Destinasi</a></li>
+                                <!-- <li class="mb-1"><a href="" class="text-decoration-none text-muted">Pesanan Saya</a></li> -->
+                                <!-- <li class="mb-1"><a href="kontak" class="text-decoration-none text-muted">Kontak</a></li> -->
+                            </ul>
+                        </div>
+
+                        <!-- Owner / academic info -->
+                        <div class="col-6 col-md-4 mb-3">
+                            <h6 class="mb-2">Informasi</h6>
+                            <ul class="list-unstyled small mb-0 text-muted">
+                                <li class="mb-1"><span class="fw-bold">Dibuat oleh:</span> <?= NAMA_LENGKAP; ?></li>
+                                <li class="mb-1"><span class="fw-bold">Mata Kuliah:</span> <?= MATKUL; ?></li>
+                                <li class="mb-1">
+                                    <span class="fw-bold">Instagram:</span>
+                                    <a href="<?= URL_IG; ?>" target="_blank" class="text-decoration-none">@<?= IG; ?></a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center py-3 border-top">
+                        <div class="small text-muted">
+                            <script>
+                                document.write(new Date().getFullYear())
+                            </script>
+                            &copy; <?= NAMA_WEB; ?> • All rights reserved.
+                        </div>
+
+                        <div class="small">
+                            <a href="<?= URL_IG; ?>" target="_blank" class="text-decoration-none me-3">Instagram</a>
+                            <a href="<?= URL_WA; ?>" target="_blank" class="text-decoration-none">WhatsApp</a>
                         </div>
                     </div>
                 </div>
             </footer>
+
+
         </div>
     </div>
 

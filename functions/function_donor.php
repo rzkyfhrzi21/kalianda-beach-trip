@@ -1,6 +1,6 @@
 <?php
 
-include 'koneksi.php';
+include 'config.php';
 session_start();
 
 ob_start();
@@ -48,7 +48,7 @@ if (isset($_POST['btn_daftardonor'])) {
     $riwayat_penyakit   = $_POST['riwayat_penyakit'] ?? '';
 
     // ===============================
-    // 💉 Validasi kelayakan pendonor
+    // 💉 Validasi kelayakan wisatawan
     // ===============================
     if (
         $keadaan_sehat === 'Tidak' || $gejala === 'Ya' || $hamil === 'Ya' ||
@@ -103,12 +103,12 @@ if (isset($_POST['btn_daftardonor'])) {
     // 🔁 Redirect setelah submit
     // =====================================
     if ($sql_daftar && $status === 'layak') {
-        header('Location: ../dashboard/pendonor?page=riwayat donor&action=daftardonor&status=success');
+        header('Location: ../dashboard/wisatawan?page=riwayat donor&action=daftardonor&status=success');
     } else if ($sql_daftar && $status === 'tidak berhasil') {
-        header('Location: ../dashboard/pendonor?page=riwayat donor&action=daftardonor&status=warning&ket=' . $ket);
+        header('Location: ../dashboard/wisatawan?page=riwayat donor&action=daftardonor&status=warning&ket=' . $ket);
     } else {
         $error = mysqli_error($koneksi);
-        header('Location: ../dashboard/pendonor?page=mulai donor&action=daftardonor&status=error&message=' . urlencode($error));
+        header('Location: ../dashboard/wisatawan?page=mulai donor&action=daftardonor&status=error&message=' . urlencode($error));
     }
     exit();
 }

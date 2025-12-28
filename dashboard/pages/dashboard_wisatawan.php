@@ -35,8 +35,8 @@
                                     </div>
                                 </div>
                                 <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                    <h6 class="text-muted font-semibold">Total Pendonor</h6>
-                                    <h6 class="font-extrabold mb-0"><?= $totalPendonor; ?></h6>
+                                    <h6 class="text-muted font-semibold">Total wisatawan</h6>
+                                    <h6 class="font-extrabold mb-0"><?= $totalwisatawan; ?></h6>
                                 </div>
                             </div>
                         </div>
@@ -96,7 +96,7 @@
                                     </thead>
                                     <tbody>
                                         <?php
-                                        include '../functions/koneksi.php';
+                                        include '../functions/config.php';
                                         $no = 1;
 
                                         // Query dengan users
@@ -148,11 +148,11 @@
                 </div>
                 <div class="card-content pb-4">
                     <?php
-                    include '../functions/koneksi.php';
+                    include '../functions/config.php';
                     $no = 1;
 
                     // Query dengan users
-                    $query      = "SELECT * FROM users WHERE role = 'pendonor' ORDER BY id_user DESC LIMIT 3";
+                    $query      = "SELECT * FROM users WHERE role = 'wisatawan' ORDER BY id_user DESC LIMIT 3";
                     $sql_query  = mysqli_query($koneksi, $query);
 
                     while ($users = mysqli_fetch_array($sql_query)) :
@@ -170,7 +170,7 @@
                         </div>
                     <?php endwhile ?>
                     <div class="px-4">
-                        <a href="?page=data pendonor" class='btn btn-block btn-xl btn-outline-primary font-bold mt-3'>Selengkapnya</a>
+                        <a href="?page=data wisatawan" class='btn btn-block btn-xl btn-outline-primary font-bold mt-3'>Selengkapnya</a>
                     </div>
                 </div>
             </div>

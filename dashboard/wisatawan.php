@@ -1,11 +1,12 @@
 <?php
-session_start();
+require_once '../functions/config.php';
 
-include '../functions/koneksi.php';
+session_start();
+include '../functions/config.php';
 include '../functions/data.php';
 include '../functions/insight.php';
 
-// Ambil data pendonor
+// Ambil data wisatawan
 $sesi_id    = htmlspecialchars($_SESSION['sesi_id']);
 
 $query          = "SELECT * FROM users WHERE id_user = '$sesi_id'";
@@ -23,7 +24,7 @@ if ($sql = mysqli_query($koneksi, $query)) {
 
 
 // Pastikan pengguna sudah login dan memiliki role admin
-if (!isset($sesi_role) || $sesi_role !== 'pendonor') {
+if (!isset($sesi_role) || $sesi_role !== 'wisatawan') {
     header('Location: ../auth/login');
     exit();
 }
@@ -40,9 +41,9 @@ $page = $_GET['page'] ?? 'dashboard'; // Default ke 'dashboard' jika tidak ada p
 
     <meta name="robots" content="noindex, nofollow">
 
-    <title><?= ucfirst($page); ?> - Dashboard Donorku</title>
+    <title><?= ucfirst($page); ?> - Dashboard <?php echo NAMA_WEB ?></title>
 
-    <link rel="shortcut icon" href="../assets/pmi-bg.jpg" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/logo.png" type="image/x-icon">
 
     <?php include 'pages/css.php'; ?>
 </head>
@@ -212,25 +213,25 @@ $page = $_GET['page'] ?? 'dashboard'; // Default ke 'dashboard' jika tidak ada p
                 // Menampilkan konten berdasarkan page
                 switch ($page) {
                     case 'riwayat donor':
-                        include 'pages/riwayat_donor_pendonor.php';
+                        include 'pages/riwayat_donor_wisatawan.php';
                         break;
                     case 'daftar donor':
                         include 'pages/daftar_donor.php';
                         break;
                     case 'profile':
-                        include 'pages/profile_pendonor.php';
+                        include 'pages/profile_wisatawan.php';
                         break;
                     case 'informasi kegiatan':
-                        include 'pages/informasi_kegiatan_pendonor.php';
+                        include 'pages/informasi_kegiatan_wisatawan.php';
                         break;
                     case 'mulai donor':
-                        include 'pages/mulai_donor_pendonor.php';
+                        include 'pages/mulai_donor_wisatawan.php';
                         break;
                     case 'galeri kegiatan':
                         include 'pages/galeri_kegiatan.php';
                         break;
                     default:
-                        include 'pages/dashboard_pendonor.php';
+                        include 'pages/dashboard_wisatawan.php';
                         break;
                 }
                 ?>

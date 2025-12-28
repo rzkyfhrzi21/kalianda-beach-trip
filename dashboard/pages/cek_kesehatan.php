@@ -141,9 +141,9 @@ $riwayat       = mysqli_fetch_array($query_riwayat);
                                         <div class="form-group mandatory">
                                             <label for="nama_lengkap" class="form-label">Nama Lengkap</label>
                                             <select class="form-select" required id="nama_user" name="nama_user" onchange="updateDataUser()">
-                                                <option value="">Pilih pendonor</option>
+                                                <option value="">Pilih wisatawan</option>
                                                 <?php
-                                                include '../functions/koneksi.php';
+                                                include '../functions/config.php';
 
                                                 $query = "SELECT a.nama_user, a.gol_darah, a.id_user, a.foto_identitas, a.tanggal_lahir, a.email, b.id_riwayat, b.usia FROM users a, riwayat_donor b WHERE a.nama_user = b.nama_user AND b.status = 'layak' AND b.id_kegiatan = '$id_kegiatan'";
 

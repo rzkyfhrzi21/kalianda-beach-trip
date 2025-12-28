@@ -1,7 +1,7 @@
     <?php
 
     // Memeriksa level user
-    if ($_SESSION['sesi_role'] !== 'pendonor') {
+    if ($_SESSION['sesi_role'] !== 'wisatawan') {
         return;
     }
 
@@ -33,7 +33,7 @@
                         </thead>
                         <tbody>
                             <?php
-                            include '../functions/koneksi.php';
+                            include '../functions/config.php';
 
                             $no     = 1;
                             $query_riwayat  = "SELECT * FROM riwayat_donor WHERE nama_user = '$sesi_nama' ORDER BY id_riwayat DESC";
