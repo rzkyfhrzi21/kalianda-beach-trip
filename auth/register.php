@@ -28,32 +28,104 @@ $nama_userLogin =  isset($_GET['nama_user']) ? $_GET['nama_user'] : '';
     <link rel="stylesheet" href="../dashboard/assets/extensions/sweetalert2/sweetalert2.min.css">
 
     <style>
+        :root {
+            --primary: #0ea5a4;
+            /* teal */
+            --primary2: #0b3b4a;
+            /* navy teal */
+            --bg1: #f6fbfb;
+            --bg2: #edf6f6;
+            --text: #0f172a;
+            --muted: #64748b;
+            --border: #e2e8f0;
+        }
+
         body {
-            /* background-image: url('../dashboard/assets/pmi-bg.jpg'); */
+            background: linear-gradient(135deg, var(--bg1), var(--bg2));
             background-size: cover;
             background-position: center;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: auto;
+            min-height: 100vh;
             margin: 0;
+            color: var(--text);
         }
 
         #auth {
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, .97);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, .08);
             padding: 2rem;
-            max-width: 400px;
+            max-width: 420px;
             width: 100%;
         }
 
-        p {
-            font-size: 16px;
+        .auth-title {
+            color: var(--primary2) !important;
+            font-weight: 800;
+            letter-spacing: .2px;
         }
 
+        .auth-subtitle {
+            color: var(--muted) !important;
+        }
+
+        .form-label,
         label {
             font-size: 14px;
+            color: var(--text);
+        }
+
+        .form-control {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: .9rem 1rem;
+            transition: .15s ease;
+        }
+
+        .form-control:focus {
+            border-color: rgba(14, 165, 164, .55);
+            box-shadow: 0 0 0 .25rem rgba(14, 165, 164, .18);
+        }
+
+        /* Tombol utama (kamu pakai class btn-danger) */
+        .btn-danger,
+        .btn-primary {
+            background-color: var(--primary) !important;
+            border-color: var(--primary) !important;
+            border-radius: 12px;
+            font-weight: 700;
+            padding: .85rem 1rem;
+            box-shadow: 0 10px 18px rgba(14, 165, 164, .22);
+        }
+
+        .btn-danger:hover,
+        .btn-primary:hover {
+            background-color: #0b8c8b !important;
+            border-color: #0b8c8b !important;
+            transform: translateY(-1px);
+        }
+
+        .text-danger {
+            color: var(--primary2) !important;
+            /* ganti "merah" jadi navy */
+        }
+
+        a {
+            color: var(--primary2);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        p {
+            font-size: 15px;
+            color: var(--muted);
         }
     </style>
 </head>

@@ -48,28 +48,26 @@ if (isset($_POST['btn_tambah_destinasi'])) {
 
 	$nama_destinasi     = htmlspecialchars(trim($_POST['nama_destinasi']));
 	$lokasi             = htmlspecialchars(trim($_POST['lokasi']));
+	$kontak_pengelola   = htmlspecialchars(trim($_POST['kontak_pengelola']));
 	$harga_per_orang    = htmlspecialchars(trim($_POST['harga_per_orang']));
 	$jam_buka           = htmlspecialchars(trim($_POST['jam_buka']));
 	$jam_tutup          = htmlspecialchars(trim($_POST['jam_tutup']));
-	$no_hp              = htmlspecialchars(trim($_POST['no_hp']));
 	$tagline_aktivitas  = htmlspecialchars(trim($_POST['tagline_aktivitas']));
-	$status             = htmlspecialchars(trim($_POST['status']));
 
 	$gambar = uploadGambarDestinasi();
 
 	$query = "
         INSERT INTO destinasi_wisata
-        (nama_destinasi, lokasi, harga_per_orang, jam_buka, jam_tutup, no_hp, tagline_aktivitas, gambar, status)
+        (nama_destinasi, lokasi, kontak_pengelola, harga_per_orang, jam_buka, jam_tutup, tagline_aktivitas, gambar)
         VALUES (
             '$nama_destinasi',
             '$lokasi',
+            '$kontak_pengelola',
             '$harga_per_orang',
             '$jam_buka',
             '$jam_tutup',
-            '$no_hp',
             '$tagline_aktivitas',
-            '$gambar',
-            '$status'
+            '$gambar'
         )
     ";
 
@@ -89,12 +87,11 @@ if (isset($_POST['btn_update_destinasi'])) {
 	$id_destinasi      = htmlspecialchars($_POST['id_destinasi']);
 	$nama_destinasi    = htmlspecialchars(trim($_POST['nama_destinasi']));
 	$lokasi            = htmlspecialchars(trim($_POST['lokasi']));
+	$kontak_pengelola  = htmlspecialchars(trim($_POST['kontak_pengelola']));
 	$harga_per_orang   = htmlspecialchars(trim($_POST['harga_per_orang']));
 	$jam_buka          = htmlspecialchars(trim($_POST['jam_buka']));
 	$jam_tutup         = htmlspecialchars(trim($_POST['jam_tutup']));
-	$no_hp             = htmlspecialchars(trim($_POST['no_hp']));
 	$tagline_aktivitas = htmlspecialchars(trim($_POST['tagline_aktivitas']));
-	$status            = htmlspecialchars(trim($_POST['status']));
 
 	// gambar lama dari hidden input
 	$gambar_lama = $_POST['gambar_lama'] ?? '';
@@ -123,13 +120,12 @@ if (isset($_POST['btn_update_destinasi'])) {
         UPDATE destinasi_wisata SET
             nama_destinasi = '$nama_destinasi',
             lokasi = '$lokasi',
+            kontak_pengelola = '$kontak_pengelola',
             harga_per_orang = '$harga_per_orang',
             jam_buka = '$jam_buka',
             jam_tutup = '$jam_tutup',
-            no_hp = '$no_hp',
             tagline_aktivitas = '$tagline_aktivitas',
-            gambar = '$gambar_final',
-            status = '$status'
+            gambar = '$gambar_final'
         WHERE id_destinasi = '$id_destinasi'
     ";
 

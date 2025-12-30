@@ -17,7 +17,6 @@ if (isset($_POST['btn_login'])) {
 		$_SESSION['sesi_role']		= $data_user['role'];
 		$_SESSION['sesi_username']	= $data_user['username'];
 		$_SESSION['sesi_nama']		= $data_user['nama_lengkap'];
-		$_SESSION['sesi_email']		= $data_user['email'];
 
 		if ($data_user['img_user'] == '') {
 			if ($data_user['role'] == 'admin') {
@@ -44,9 +43,9 @@ if (isset($_POST['btn_register'])) {
 	$konfirmasi_password    = htmlspecialchars($_POST['konfirmasi_password']);
 	$role 					= 'wisatawan';
 
-	$sql_login          = mysqli_query($koneksi, "SELECT * from users where username = '$username'");
-	$jumlah_users       = mysqli_num_rows($sql_login);
-	$data_users         = mysqli_fetch_array($sql_login);
+	$sql_login          	= mysqli_query($koneksi, "SELECT * from users where username = '$username'");
+	$jumlah_users       	= mysqli_num_rows($sql_login);
+	$data_users         	= mysqli_fetch_array($sql_login);
 
 	if ($password !== $konfirmasi_password) {
 		header("Location: ../auth/register?action=passwordnotsame&status=warning&username=" . $username . '&nama_lengkap=' . $nama_lengkap);

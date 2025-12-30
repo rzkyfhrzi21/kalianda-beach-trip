@@ -21,8 +21,7 @@ if (!isset($_SESSION['sesi_role']) || $_SESSION['sesi_role'] !== 'admin') {
                             <th>No</th>
                             <th>ID User</th>
                             <th>Nama Lengkap</th>
-                            <th>No HP</th>
-                            <th>Jenis Kelamin</th>
+                            <th>Username</th>
                             <th>Role</th>
                             <th>Aksi</th>
                         </tr>
@@ -32,10 +31,7 @@ if (!isset($_SESSION['sesi_role']) || $_SESSION['sesi_role'] !== 'admin') {
                         <?php
                         $no = 1;
 
-                        $query  = "SELECT id_user, nama_lengkap, no_hp, jenis_kelamin, role, dibuat_pada
-                                   FROM users
-                                   WHERE role = 'admin'
-                                   ORDER BY dibuat_pada DESC";
+                        $query  = "SELECT * FROM users WHERE role = 'admin' ORDER BY id_user DESC";
                         $result = mysqli_query($koneksi, $query);
 
                         if (!$result) {
@@ -49,8 +45,7 @@ if (!isset($_SESSION['sesi_role']) || $_SESSION['sesi_role'] !== 'admin') {
                                     <td class="text-center"><?= $no++; ?></td>
                                     <td><?= htmlspecialchars($users['id_user']); ?></td>
                                     <td><?= htmlspecialchars($users['nama_lengkap']); ?></td>
-                                    <td><?= htmlspecialchars($users['no_hp']); ?></td>
-                                    <td><?= htmlspecialchars($users['jenis_kelamin']); ?></td>
+                                    <td><?= htmlspecialchars($users['username']); ?></td>
                                     <td>
                                         <span class="badge bg-danger">
                                             <?= ucfirst(htmlspecialchars($users['role'])); ?>

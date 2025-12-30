@@ -66,6 +66,22 @@ if ($_SESSION['sesi_role'] !== 'admin') {
                                     </div>
                                 </div>
 
+                                <div class="col-md-6 mt-3">
+                                    <div class="form-group mandatory">
+                                        <label for="kontak_pengelola" class="form-label">Kontak Pengelola</label>
+                                        <input
+                                            type="tel"
+                                            id="kontak_pengelola"
+                                            class="form-control"
+                                            name="kontak_pengelola"
+                                            placeholder="628***"
+                                            pattern="^\d{10,15}$"
+                                            data-parsley-required="true"
+                                            data-parsley-pattern="^\d{10,15}$"
+                                            title="Nomor telepon harus terdiri dari 10 hingga 15 digit." />
+                                    </div>
+                                </div>
+
                                 <!-- Harga -->
                                 <div class="col-md-6 mt-3">
                                     <div class="form-group mandatory">
@@ -110,30 +126,6 @@ if ($_SESSION['sesi_role'] !== 'admin') {
                                             class="form-control flatpickr-no-config flatpickr-time-picker-24h"
                                             name="jam_tutup"
                                             data-parsley-required="true" />
-                                    </div>
-                                </div>
-
-                                <!-- Nomor HP -->
-                                <div class="col-md-6 mt-3">
-                                    <div class="form-group mandatory">
-                                        <label class="form-label">Nomor HP Pengelola</label>
-                                        <input type="text"
-                                            name="no_hp"
-                                            class="form-control"
-                                            placeholder="08xxxxxxxxxx"
-                                            pattern="^[0-9]{10,15}$"
-                                            required>
-                                    </div>
-                                </div>
-
-                                <!-- Status -->
-                                <div class="col-md-6 mt-3">
-                                    <div class="form-group mandatory">
-                                        <label class="form-label">Status Destinasi</label>
-                                        <select name="status" class="form-select" required>
-                                            <option value="aktif">Aktif</option>
-                                            <option value="nonaktif">Nonaktif</option>
-                                        </select>
                                     </div>
                                 </div>
 

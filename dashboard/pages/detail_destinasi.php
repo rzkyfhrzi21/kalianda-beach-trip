@@ -45,6 +45,22 @@ if (!$data) die("Data tidak ditemukan");
                     </div>
                     <div class="col-md-6 mt-3">
                         <div class="form-group mandatory">
+                            <label for="kontak_pengelola" class="form-label">Kontak Pengelola</label>
+                            <input
+                                type="tel"
+                                id="kontak_pengelola"
+                                class="form-control"
+                                name="kontak_pengelola"
+                                placeholder="628***"
+                                pattern="^\d{10,15}$"
+                                data-parsley-required="true"
+                                data-parsley-pattern="^\d{10,15}$"
+                                value="<?= $data['kontak_pengelola']; ?>"
+                                title="Nomor telepon harus terdiri dari 10 hingga 15 digit." />
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-3">
+                        <div class="form-group mandatory">
                             <label>Harga per Orang</label>
                             <input type="number" name="harga_per_orang" class="form-control"
                                 value="<?= $data['harga_per_orang']; ?>" data-parsley-required="true">
@@ -85,24 +101,6 @@ if (!$data) die("Data tidak ditemukan");
                                 data-parsley-required="true" />
                         </div>
                     </div>
-
-                    <div class="col-md-6 mt-3">
-                        <div class="form-group mandatory">
-                            <label>No HP Pengelola</label>
-                            <input type="text" name="no_hp" class="form-control"
-                                value="<?= $data['no_hp']; ?>" data-parsley-required="true">
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 mt-3">
-                        <label class="form-label">Status</label>
-                        <select name="status" class="form-select">
-                            <option value="aktif" <?= $data['status'] === 'aktif' ? 'selected' : '' ?>>Aktif</option>
-                            <option value="nonaktif" <?= $data['status'] === 'nonaktif' ? 'selected' : '' ?>>Nonaktif</option>
-                        </select>
-
-                    </div>
-
 
                     <div class="col-md-6 mt-3">
                         <label>Gambar Destinasi</label>

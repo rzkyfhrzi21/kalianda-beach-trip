@@ -56,7 +56,7 @@ if (isset($_POST['btn_editfotoakun'])) {
 
 		mysqli_query($koneksi, "
             UPDATE users 
-            SET foto_profil = '$foto_baru', diubah_pada = NOW()
+            SET foto_profil = '$foto_baru'
             WHERE id_user = '$id_user'
         ");
 	}
@@ -72,17 +72,10 @@ if (isset($_POST['btn_editdatapribadi'])) {
 
 	$id_user       = $_POST['id_user'];
 	$nama_lengkap  = trim($_POST['nama_lengkap']);
-	$email         = trim($_POST['email']);
-	$no_hp         = trim($_POST['no_hp']);
-	$jenis_kelamin = trim($_POST['jenis_kelamin']);
 
 	mysqli_query($koneksi, "
         UPDATE users SET
             nama_lengkap = '$nama_lengkap',
-            email = '$email',
-            no_hp = '$no_hp',
-            jenis_kelamin = '$jenis_kelamin',
-            diubah_pada = NOW()
         WHERE id_user = '$id_user'
     ");
 
@@ -118,16 +111,14 @@ if (isset($_POST['btn_editdataakun'])) {
             UPDATE users SET 
                 username = '$username',
                 password = '$password',
-                role = '$role',
-                diubah_pada = NOW()
+                role = '$role'
             WHERE id_user = '$id_user'
         ";
 	} else {
 		$query = "
             UPDATE users SET 
                 username = '$username',
-                role = '$role',
-                diubah_pada = NOW()
+                role = '$role'
             WHERE id_user = '$id_user'
         ";
 	}
@@ -166,9 +157,6 @@ if (isset($_POST['btn_adminregister'])) {
 	$id_user        = mysqli_real_escape_string($koneksi, trim($_POST['id_user'] ?? '')); // jika form mengirim id_user
 	$nama_lengkap   = mysqli_real_escape_string($koneksi, trim($_POST['nama_lengkap'] ?? ''));
 	$username       = mysqli_real_escape_string($koneksi, trim($_POST['username'] ?? ''));
-	$email          = mysqli_real_escape_string($koneksi, trim($_POST['email'] ?? ''));
-	$no_hp          = mysqli_real_escape_string($koneksi, trim($_POST['no_hp'] ?? ''));
-	$jenis_kelamin  = mysqli_real_escape_string($koneksi, trim($_POST['jenis_kelamin'] ?? ''));
 	$role           = mysqli_real_escape_string($koneksi, trim($_POST['role'] ?? 'wisatawan'));
 
 	$password       = trim($_POST['password'] ?? '');
@@ -177,7 +165,7 @@ if (isset($_POST['btn_adminregister'])) {
 	// =========================
 	// VALIDASI WAJIB
 	// =========================
-	if ($nama_lengkap === '' || $username === '' || $no_hp === '' || $jenis_kelamin === '' || $role === '' || $password === '' || $konfirmasi === '') {
+	if ($nama_lengkap === '' || $username === '' || $password === '' || $konfirmasi === '') {
 		header("Location: ../dashboard/admin?page=registrasi&action=emptyfield&status=warning");
 		exit();
 	}
@@ -197,25 +185,13 @@ if (isset($_POST['btn_adminregister'])) {
 	}
 
 	// =========================
-	// VALIDASI UNIK: email (opsional)
-	// Kalau email boleh kosong, tetap aman.
-	// =========================
-	if ($email !== '') {
-		$cek_email = mysqli_query($koneksi, "SELECT id_user FROM users WHERE email = '$email' LIMIT 1");
-		if ($cek_email && mysqli_num_rows($cek_email) > 0) {
-			header("Location: ../dashboard/admin?page=registrasi&action=emailexist&status=warning");
-			exit();
-		}
-	}
-
-	// =========================
 	// UPLOAD FOTO PROFIL (pakai fungsi uploadImg() existing)
 	// Jika form kamu mewajibkan upload, maka uploadImg() dipanggil.
 	// Jika upload opsional, aman juga.
 	// =========================
 	$foto_profil = '';
-	if (isset($_FILES['img_user']) && $_FILES['img_user']['error'] != 4) {
-		$foto_profil = uploadImg(); // output: nama file baru
+	if (isset($_FILES['foto_profil']) && $_FILES['foto_profil']['error'] != 4) {
+		$foto_profil = uploadFotoProfil(); // output: nama file baru
 	}
 
 	// =========================
@@ -226,24 +202,16 @@ if (isset($_POST['btn_adminregister'])) {
             id_user,
             nama_lengkap,
             username,
-            email,
-            no_hp,
             password,
             foto_profil,
-            jenis_kelamin,
-            role,
-            dibuat_pada
+            role
         ) VALUES (
             '$id_user',
             '$nama_lengkap',
             '$username',
-            '$email',
-            '$no_hp',
             '$password',
             '$foto_profil',
-            '$jenis_kelamin',
-            '$role',
-            NOW()
+            '$role'
         )";
 
 	$insert = mysqli_query($koneksi, $query_tambah);

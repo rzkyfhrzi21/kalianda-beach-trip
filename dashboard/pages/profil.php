@@ -11,9 +11,7 @@ $id_user = !empty($_GET['id']) ? $_GET['id'] : $id_profil;
 if (empty($id_user)) return;
 
 // Ambil data user berdasarkan id
-$query = "SELECT id_user, nama_lengkap, username, email, no_hp, password, foto_profil, jenis_kelamin, role, dibuat_pada, diubah_pada
-          FROM users
-          WHERE id_user = '$id_user'";
+$query = "SELECT * FROM users WHERE id_user = '$id_user'";
 
 $sql = mysqli_query($koneksi, $query);
 if (!$sql) return;
@@ -25,8 +23,6 @@ if (!$users) return;
 $id_user        = $users['id_user'] ?? '';
 $nama_lengkap   = $users['nama_lengkap'] ?? '';
 $username       = $users['username'] ?? '';
-$email          = $users['email'] ?? '';
-$no_hp          = $users['no_hp'] ?? '';
 $foto_profil    = $users['foto_profil'] ?? '';
 $jenis_kelamin  = $users['jenis_kelamin'] ?? '';
 $role           = $users['role'] ?? '';
@@ -62,8 +58,7 @@ $role           = $users['role'] ?? '';
                     <div class="d-flex justify-content-center align-items-center flex-column">
                         <div class="avatar avatar-xl">
                             <img src="assets/<?= empty($foto_profil) ? 'static/images/faces/1.jpg' : 'img/foto_profil/' . htmlspecialchars($foto_profil) ?>"
-                                alt="Foto Profil"
-                                onerror="this.src='assets/static/images/faces/1.jpg'">
+                                alt="Foto Profil">
                         </div>
                         <h3 class="mt-3"><?= htmlspecialchars($nama_lengkap); ?></h3>
                         <p class="text-small text-capitalize text-bold"><?= htmlspecialchars($role); ?></p>
@@ -144,45 +139,6 @@ $role           = $users['role'] ?? '';
                                     <input type="text" class="form-control" disabled
                                         value="<?= htmlspecialchars($id_user); ?>" />
                                     <div class="form-control-icon"><i class="bi bi-person-badge"></i></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row form-group mandatory has-icon-left">
-                            <div class="col-md-6 col-12">
-                                <label for="no_hp" class="form-label">No HP</label>
-                                <div class="position-relative">
-                                    <input type="tel" id="no_hp" class="form-control"
-                                        name="no_hp" placeholder="08***"
-                                        pattern="^\d{10,15}$"
-                                        data-parsley-required="true"
-                                        data-parsley-pattern="^\d{10,15}$"
-                                        value="<?= htmlspecialchars($no_hp); ?>" />
-                                    <div class="form-control-icon"><i class="bi bi-phone"></i></div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6 col-12 mt-2">
-                                <label class="form-label">Jenis Kelamin</label>
-                                <div class="form-group">
-                                    <select name="jenis_kelamin" class="form-select" required>
-                                        <option value="" disabled <?= empty($jenis_kelamin) ? 'selected' : ''; ?>>Pilih</option>
-                                        <option value="Laki-laki" <?= $jenis_kelamin === 'Laki-laki' ? 'selected' : ''; ?>>Laki-laki</option>
-                                        <option value="Perempuan" <?= $jenis_kelamin === 'Perempuan' ? 'selected' : ''; ?>>Perempuan</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row form-group mandatory has-icon-left">
-                            <div class="col-md-6 col-12">
-                                <label for="email" class="form-label">Email</label>
-                                <div class="position-relative">
-                                    <input type="email" id="email" class="form-control"
-                                        name="email" placeholder="Email"
-                                        value="<?= htmlspecialchars($email); ?>"
-                                        data-parsley-required="true" />
-                                    <div class="form-control-icon"><i class="bi bi-envelope"></i></div>
                                 </div>
                             </div>
                         </div>

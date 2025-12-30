@@ -39,6 +39,7 @@ $page = $_GET['page'] ?? 'dashboard'; // Default ke 'dashboard' jika tidak ada p
     <link rel="shortcut icon" href="assets/logo.png" type="image/x-icon">
 
     <?php include 'pages/css.php'; ?>
+
 </head>
 
 <body>
@@ -297,7 +298,7 @@ $page = $_GET['page'] ?? 'dashboard'; // Default ke 'dashboard' jika tidak ada p
                             <script>
                                 document.write(new Date().getFullYear())
                             </script>
-                            &copy; <?= NAMA_WEB; ?> • All rights reserved.
+                            &copy; <?= NAMA_WEB; ?>
                         </div>
 
                         <div class="small">

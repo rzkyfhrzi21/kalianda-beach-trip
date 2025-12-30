@@ -26,7 +26,7 @@ unset($_SESSION['form_data']);
                 <div class="mb-3">
                     <label class="form-label">Foto Profil</label>
                     <input type="file"
-                        name="img_user"
+                        name="foto_profil"
                         class="image-crop-filepond"
                         data-max-file-size="1MB"
                         data-max-files="1"
@@ -53,49 +53,6 @@ unset($_SESSION['form_data']);
                             value="<?= htmlspecialchars($username); ?>"
                             minlength="5"
                             required>
-                    </div>
-
-                    <!-- EMAIL -->
-                    <div class="col-md-6 mt-3">
-                        <label class="form-label">Email</label>
-                        <input type="email"
-                            name="email"
-                            class="form-control"
-                            value="<?= htmlspecialchars($email); ?>"
-                            required>
-                    </div>
-
-                    <!-- NO HP -->
-                    <div class="col-md-6 mt-3">
-                        <label class="form-label">No HP</label>
-                        <input type="tel"
-                            name="no_hp"
-                            class="form-control"
-                            pattern="^\d{10,15}$"
-                            value="<?= htmlspecialchars($no_hp); ?>"
-                            required>
-                    </div>
-
-                    <!-- JENIS KELAMIN -->
-                    <div class="col-md-6 mt-3">
-                        <label class="form-label">Jenis Kelamin</label>
-                        <div class="form-check">
-                            <input class="form-check-input"
-                                type="radio"
-                                name="jenis_kelamin"
-                                value="Laki-laki"
-                                <?= $jenis_kelamin === 'Laki-laki' ? 'checked' : '' ?>
-                                required>
-                            <label class="form-check-label">Laki-laki</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input"
-                                type="radio"
-                                name="jenis_kelamin"
-                                value="Perempuan"
-                                <?= $jenis_kelamin === 'Perempuan' ? 'checked' : '' ?>>
-                            <label class="form-check-label">Perempuan</label>
-                        </div>
                     </div>
 
                     <!-- ROLE -->
@@ -132,11 +89,16 @@ unset($_SESSION['form_data']);
                 <div class="form-check mt-4">
                     <input class="form-check-input"
                         type="checkbox"
-                        required>
-                    <label class="form-check-label">
+                        name="setuju"
+                        id="setuju"
+                        required
+                        data-parsley-required="true"
+                        data-parsley-errors-container="#error-setuju">
+                    <label class="form-check-label" for="setuju">
                         Saya menyetujui syarat dan ketentuan yang berlaku
                     </label>
                 </div>
+                <div id="error-setuju" class="text-danger small mt-1"></div>
 
                 <!-- BUTTON -->
                 <div class="mt-4 d-flex justify-content-end">
