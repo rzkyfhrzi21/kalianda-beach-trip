@@ -1,6 +1,6 @@
 <?php
 
-define("NAMA_WEB", "Kalianda Beach Trip");
+define("NAMA_WEB", "SIDESA NATAR");
 define("NAMA_LENGKAP", "Laila Nurmas Vigih");
 define("IG", "lailansvh");
 define("EMAIL", "lailanurmasv@gmail.com");
